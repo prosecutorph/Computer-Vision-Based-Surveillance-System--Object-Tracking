@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 # Set up the camera
 camera = cv2.VideoCapture(0)
 
@@ -38,7 +37,7 @@ while True:
     for i, (new, old) in enumerate(zip(new_features, good_features)):
         a, b = new.ravel()
         c, d = old.ravel()
-        mask = cv2.line(mask, (a, b), (c, d), (0, 255, 0), 2)
+        mask = cv2.line(mask, (int(a), int(b)), (int(c), int(d)), (0, 255, 0), 2)
         frame = cv2.circle(frame, (a, b), 5, (0, 0, 255), -1)
 
     # Display the frame
