@@ -30,8 +30,9 @@ while True:
     new_features, status, error = cv2.calcOpticalFlowPyrLK(prev_gray, gray, features, None, **lk_params)
 
     # Select the good points
-    good_features = features[status == 1]
-    new_features = new_features[status == 1]
+    good_features = features[np.expand_dims(status, axis=1) == 1]
+    new_features = new_features[np.expand_dims(status, axis=1) == 1]
+
 
     # Draw the tracks
     for i, (new, old) in enumerate(zip(new_features, good_features)):
