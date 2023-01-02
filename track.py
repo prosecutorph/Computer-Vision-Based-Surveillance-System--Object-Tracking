@@ -15,8 +15,8 @@ features = cv2.goodFeaturesToTrack(prev_gray, mask=None, **feature_params)
 # Create a mask image for drawing purposes
 mask = np.zeros_like(frame)
 
+# Define the parameters for the Lucas-Kanade optical flow algorithm
 lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
-
 
 # Capture and display the frames from the camera
 while True:
@@ -38,7 +38,7 @@ while True:
         a, b = new.ravel()
         c, d = old.ravel()
         mask = cv2.line(mask, (int(a), int(b)), (int(c), int(d)), (0, 255, 0), 2)
-        frame = cv2.circle(frame, (a, b), 5, (0, 0, 255), -1)
+        frame = cv2.circle(frame, (int(a), int(b)), 5, (0, 0, 255), -1)
 
     # Display the frame
     cv2.imshow("Camera", frame)
@@ -47,11 +47,11 @@ while True:
     prev_gray = gray
     features = new_features
 
-    # Check for user input
-    key = cv2.waitKey(1)
-    if key == 27:  # Press 'ESC' to quit
+    # Check if the 'q' key has been pressed
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord("q"):
         break
 
-# Clean up
+# Release the camera and destroy the windows
 camera.release()
 cv2.destroyAllWindows()
