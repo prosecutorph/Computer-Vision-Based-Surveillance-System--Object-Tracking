@@ -19,9 +19,12 @@ while True:
     # Find contours in the motion map
     contours, _ = cv2.findContours(motion, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Draw a rectangle around the contours
-    for c in contours:
+    # Find the largest contour
+    if contours:
+        c = max(contours, key=cv2.contourArea)
         x, y, w, h = cv2.boundingRect(c)
+
+        # Draw a rectangle around the contour
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     # Display the frame
