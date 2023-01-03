@@ -1,4 +1,3 @@
-import pymotion as pm
 import cv2
 
 # Set up the camera
