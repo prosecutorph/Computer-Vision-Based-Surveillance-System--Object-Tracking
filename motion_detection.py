@@ -47,7 +47,7 @@ while True:
 
         # Add text on top of the rectangle
         font = cv2.FONT_HERSHEY_SIMPLEX
-        text = "Human"
+        text = "Motion Detected"
         text_size = cv2.getTextSize(text, font, 0.5, 1)[0]
         text_x = x + 10
         text_y = y - text_size[1] - 10
